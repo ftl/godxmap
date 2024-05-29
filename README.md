@@ -22,7 +22,7 @@ func serveCallsigns(server *godxmap.Server) {
 		time.Sleep(10 * time.Second)
 		server.ShowPartialCall(callsign)
 	}
-	err := server.Shutdown(context.Background())
+	err := server.Close()
 	if err != nil {
 		log.Printf("error closing the server: %v", err)
 	}

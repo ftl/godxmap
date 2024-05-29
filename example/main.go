@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"log"
 	"net/http"
 	"time"
@@ -23,12 +22,19 @@ func main() {
 }
 
 func serveCallsigns(server *godxmap.Server) {
+	time.Sleep(10 * time.Second)
+	server.ShowGab("goDXMap", "HamDXMap", "Starting the demo...")
+
 	callsigns := []string{"F5UII", "W1AW", "PY1PY", "DL3NEY", "ZL2CTM"}
 	for _, callsign := range callsigns {
 		time.Sleep(10 * time.Second)
 		server.ShowPartialCall(callsign)
 	}
-	err := server.Shutdown(context.Background())
+
+	time.Sleep(10 * time.Second)
+	server.ShowGab("goDXMap", "HamDXMap", "That was the demo. 73!")
+
+	err := server.Close()
 	if err != nil {
 		log.Printf("error closing the server: %v", err)
 	}
